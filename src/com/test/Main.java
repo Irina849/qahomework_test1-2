@@ -94,12 +94,98 @@ public class Main {
         System.out.println("task7");
         System.out.println("Найти число, состоящее только из различных цифр. Если таких чисел несколько, найти первое из них.");*/
 
-/*        System.out.println();
+/*      System.out.println();
         System.out.println("task8");
         System.out.println("Вывести числа от 1 до k в виде матрицы N x N слева направо и сверху вниз.");
         printMatrixFromTo(in);*/
 
+/*      System.out.println();
+        System.out.println("task9");
+        System.out.println("9.Ввести с консоли n-размерность матрицы a [n] [n]. Задать значения элемен-
+тов матрицы в интервале значений от -n до n с помощью датчика случайных чи-
+сел.");
 
+       */
+        System.out.print("Введите кол-во значений для ввода: ");
+        String n = in.nextLine();
+        int[][] matrix = new int[Integer.parseInt(n)][Integer.parseInt(n)];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
+                matrix[i][j] = (int) (Math.random() * (Integer.parseInt(n) + Integer.parseInt(n)) + (-Integer.parseInt(n)));
+                System.out.print(matrix[i][j] + "\t");
+            }
+            System.out.println();
+        }
+        System.out.println("\n****************\n");
+
+
+        //task 9
+        //task 9/1
+        //task 9/2
+        System.out.print("Введите кол-во озиций для сдвига: ");
+        String k = in.nextLine();
+
+        int m[][] = matrix.clone();
+        for (int i = 0, matrixLength = matrix.length; i < matrixLength; i++) {
+            m[i] = cyclicRowMove(m[i], Integer.parseInt(k));
+        }
+        for (int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m.length; j++) {
+                System.out.print(m[i][j] + "\t");
+            }
+            System.out.println();
+        }
+        //task 9/3
+        int max = 1;
+        int maxValue = matrix[0][0];
+        int maxMax = 1;
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
+                if (matrix[i][j] > maxValue) {
+                    maxValue = matrix[i][j];
+                    max++;
+                    if (max > maxMax) maxMax++;
+                } else {
+                    maxValue = matrix[i][j];
+                    max = 1;
+                }
+            }
+        }
+        System.out.println("max = " + maxMax);
+        System.out.println("\n****************\n");
+
+        //task 9/4
+        int sum = 0;
+        int val1, val2, jots1 = 0, jots2 = 0;
+        boolean s1 = false;
+        boolean s2 = false;
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
+                if ((matrix[i][j] > 0) && !s1) {
+                    // val1 = matrix[i][j];
+                    s1 = true;
+                    jots1 = j;
+                    continue;
+                } else if ((matrix[i][j] > 0) && !s2) {
+                    //  val2 = matrix[i][j];
+                    s2 = true;
+                    jots2 = j;
+                }
+            }
+            if (s1 && s2) {
+                for (int g = jots1 + 1; g < jots2; g++) {
+                    sum += matrix[i][g];
+                }
+                if (jots2 == jots1 + 1) {
+                    System.out.println("Между двумя найденными положительными значениями нет никаких чисел.");
+                } else System.out.println("sum = " + sum);
+            } else {
+                System.out.println("Нет двух положительных значений в строке");
+            }
+            s1 = false;
+            s2 = false;
+            sum = 0;
+        }
     }
 
     //task1
@@ -357,6 +443,17 @@ public class Main {
                 }
             }
         }
+    }
+
+    private static int[] cyclicRowMove(int[] row, int k) {
+        int rowLenght = row.length;
+
+        int r[] = new int[rowLenght];
+        int n = (k % rowLenght) + rowLenght;
+        for (int i = 0; i < rowLenght; i++) {
+            r[(i + n) % rowLenght] = row[i];
+        }
+        return r;
     }
 
 
