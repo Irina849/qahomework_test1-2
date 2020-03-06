@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class Main {
 
@@ -42,9 +43,10 @@ public class Main {
         System.out.println("task6");
         System.out.println("Ввести с консоли n целых чисел.");
         biiigTask6(in);*/
+
         /**********************/
 
-/*      System.out.print("Введите кол-во значений для ввода: ");
+        System.out.print("Введите кол-во значений для ввода: ");
         int n = in.nextInt();
         if (n == 0) {
             System.out.print("Программа завершена.");
@@ -54,9 +56,9 @@ public class Main {
         System.out.print("Введите целые числа через пробел: ");
         for (int i = 0; i < n; i++) {
             array[i] = in.nextInt();
-        }*/
+        }
 
-/*      System.out.println("TASK2");
+        System.out.println("TASK2");
         System.out.println();
         System.out.println("task1");
         System.out.println("Найти самое короткое и самое длинное число. Вывести найденные числа и их длину.");
@@ -70,123 +72,55 @@ public class Main {
         System.out.println();
         System.out.println("task3");
         System.out.println("Вывести на консоль те числа, длина которых меньше (больше) средней, а также длину.");
-        lengthMoreSr(n, array);*/
+        lengthMoreSr(n, array);
 
-/*        System.out.println();
+        System.out.println();
         System.out.println("task4");
         System.out.println("Найти число, в котором число различных цифр минимально. Если таких чисел несколько, найти первое из них.");
-
+        varabValMi(n, array);
+/*
         System.out.println();
         System.out.println("task5");
         System.out.println("Найти количество чисел, содержащих только четные цифры, а среди них количество чисел с равным числом четных и нечетных цифр.");
 
+        boolean val = false;
+        for (int i = 0; i < array.length; i++) {
+            String s = "" + array[i];
+            char[] ch = s.toCharArray();
+            for (int i1 = 0; i1 < ch.length; i1++) {
+                if (ch[i1] % 2 == 0) {
+                    val = true;
+                } else {
+                    val = false;
+                    break;
+                }
+            }
+            if (val) System.out.println(array[i]);
+        }
+*/
+
         System.out.println();
         System.out.println("task6");
         System.out.println("Найти число, цифры в котором идут в строгом порядке возрастания. Если таких чисел несколько, найти первое из них.");
-        int n = in.nextInt();
-
-        int[] values = new int[n];
-        for (int i = 0; i < n; i++) {
-            values[i] = in.nextInt();
-        }
+        increasingNumbers(array);
 
         System.out.println();
         System.out.println("task7");
-        System.out.println("Найти число, состоящее только из различных цифр. Если таких чисел несколько, найти первое из них.");*/
+        System.out.println("Найти число, состоящее только из различных цифр. Если таких чисел несколько, найти первое из них.");
+        variousValues(array);
 
-/*      System.out.println();
+        System.out.println();
         System.out.println("task8");
         System.out.println("Вывести числа от 1 до k в виде матрицы N x N слева направо и сверху вниз.");
-        printMatrixFromTo(in);*/
+        printMatrixFromTo(in);
 
-/*      System.out.println();
+        System.out.println();
         System.out.println("task9");
-        System.out.println("9.Ввести с консоли n-размерность матрицы a [n] [n]. Задать значения элемен-
-тов матрицы в интервале значений от -n до n с помощью датчика случайных чи-
-сел.");
+        System.out.println("9.Ввести с консоли n-размерность матрицы a [n] [n]. Задать значения элементов матрицы в интервале значений от -n до n с помощью датчика случайных чисел.");
+        allAboutMatrix(in);
 
-       */
-        System.out.print("Введите кол-во значений для ввода: ");
-        String n = in.nextLine();
-        int[][] matrix = new int[Integer.parseInt(n)][Integer.parseInt(n)];
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix.length; j++) {
-                matrix[i][j] = (int) (Math.random() * (Integer.parseInt(n) + Integer.parseInt(n)) + (-Integer.parseInt(n)));
-                System.out.print(matrix[i][j] + "\t");
-            }
-            System.out.println();
-        }
-        System.out.println("\n****************\n");
-
-
-        //task 9
-        //task 9/1
-        //task 9/2
-        System.out.print("Введите кол-во озиций для сдвига: ");
-        String k = in.nextLine();
-
-        int m[][] = matrix.clone();
-        for (int i = 0, matrixLength = matrix.length; i < matrixLength; i++) {
-            m[i] = cyclicRowMove(m[i], Integer.parseInt(k));
-        }
-        for (int i = 0; i < m.length; i++) {
-            for (int j = 0; j < m.length; j++) {
-                System.out.print(m[i][j] + "\t");
-            }
-            System.out.println();
-        }
-        //task 9/3
-        int max = 1;
-        int maxValue = matrix[0][0];
-        int maxMax = 1;
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix.length; j++) {
-                if (matrix[i][j] > maxValue) {
-                    maxValue = matrix[i][j];
-                    max++;
-                    if (max > maxMax) maxMax++;
-                } else {
-                    maxValue = matrix[i][j];
-                    max = 1;
-                }
-            }
-        }
-        System.out.println("max = " + maxMax);
-        System.out.println("\n****************\n");
-
-        //task 9/4
-        int sum = 0;
-        int val1, val2, jots1 = 0, jots2 = 0;
-        boolean s1 = false;
-        boolean s2 = false;
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix.length; j++) {
-                if ((matrix[i][j] > 0) && !s1) {
-                    // val1 = matrix[i][j];
-                    s1 = true;
-                    jots1 = j;
-                    continue;
-                } else if ((matrix[i][j] > 0) && !s2) {
-                    //  val2 = matrix[i][j];
-                    s2 = true;
-                    jots2 = j;
-                }
-            }
-            if (s1 && s2) {
-                for (int g = jots1 + 1; g < jots2; g++) {
-                    sum += matrix[i][g];
-                }
-                if (jots2 == jots1 + 1) {
-                    System.out.println("Между двумя найденными положительными значениями нет никаких чисел.");
-                } else System.out.println("sum = " + sum);
-            } else {
-                System.out.println("Нет двух положительных значений в строке");
-            }
-            s1 = false;
-            s2 = false;
-            sum = 0;
-        }
     }
+
 
     //task1
     private static void greeting(Scanner in) {
@@ -206,7 +140,7 @@ public class Main {
     private static void printRandomValues(Scanner in) {
         System.out.print("Введите кол-во значений для ввода: ");
         String n = in.nextLine();
-        double array[] = new double[Integer.parseInt(n)];
+        double[] array = new double[Integer.parseInt(n)];
         System.out.println("Вывод в столбец:");
         for (int i = 0; i < Integer.parseInt(n); i++) {
             array[i] = Math.random() * 100;
@@ -400,9 +334,80 @@ public class Main {
     }
 
     //task4
+
+    private static void varabValMi(int n, Integer[] array) {
+        int[] countArray = new int[n];
+
+        for (int i = 0; i < array.length; i++) {
+            String s = "" + array[i];
+            char[] ch = s.toCharArray();
+            int count = 0;
+
+            for (int i1 = 0; i1 < ch.length; i1++) {
+                for (int i2 = 1; i2 < ch.length; i2++) {
+                    if (ch[i1] == ch[i2]) {
+                        count++;
+                    }
+                }
+            }
+            countArray[i] = count;
+        }
+        int min = countArray[0];
+        int minVal = 0;
+        for (int i = 0; i < countArray.length; i++) {
+            if (countArray[i] > min) {
+                min = countArray[i];
+                minVal = i;
+            }
+        }
+        System.out.println("min = " + min + "\tValue with least Digits Number: " + array[minVal]);
+    }
+
     //task5
     //task6
+    private static void increasingNumbers(Integer[] array) {
+        boolean val = false, justFirst = true;
+        for (int i = 0; i < array.length; i++) {
+            String s = "" + array[i];
+            char[] ch = s.toCharArray();
+            for (int i1 = 0; i1 < ch.length - 1; i1++) {
+                if (ch[i1] >= ch[i1 + 1]) break;
+                else val = true;
+            }
+            if (val && justFirst) {
+                System.out.println(array[i]);
+                val = false;
+                justFirst = false;
+            }
+        }
+    }
+
     //task7
+    private static void variousValues(Integer[] array) {/*
+        int[] intArray = Arrays.stream(array).mapToInt(Integer::intValue).toArray();
+        IntStream.of(intArray)
+                .filter(x -> String.valueOf(x).chars()
+                        .distinct()
+                        .count() == String.valueOf(x).length())
+                .forEach(System.out::println);*/
+
+        boolean val = false, justFirst = true;
+        for (int i = 0; i < array.length; i++) {
+            String s = "" + array[i];
+            char[] ch = s.toCharArray();
+            for (int i1 = 0; i1 < ch.length - 1; i1++) {
+                if (ch[i1] == ch[i1 + 1]) break;
+                else val = true;
+            }
+            if (val && justFirst) {
+                System.out.println(array[i]);
+                val = false;
+                justFirst = false;
+            }
+        }
+
+    }
+
     //task8
     private static void printMatrixFromTo(Scanner in) {
         System.out.print("Введите кол-во значений для ввода: ");
@@ -417,7 +422,7 @@ public class Main {
             System.out.print("Программа завершена.");
             System.exit(0);
         }
-        int arr[][] = new int[N][N];
+        int[][] arr = new int[N][N];
         int firstValue = 1;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
@@ -432,29 +437,227 @@ public class Main {
         }
     }
 
+    //task 9
 
-    private static void bubbleSort(int[] a) {
-        for (int i = a.length - 1; i >= 0; i--) {
-            for (int j = 0; j < i; j++) {
-                if (a[j] > a[j + 1]) {
-                    int thirdCUP = a[j];
-                    a[j] = a[j + 1];
-                    a[j + 1] = thirdCUP;
+    private static void allAboutMatrix(Scanner in) {
+        System.out.print("Введите кол-во значений для ввода: ");
+        String n = in.nextLine();
+        int[][] matrix = new int[Integer.parseInt(n)][Integer.parseInt(n)];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
+                matrix[i][j] = (int) (Math.random() * (Integer.parseInt(n) + Integer.parseInt(n)) + (-Integer.parseInt(n)));
+                System.out.print(matrix[i][j] + "\t");
+            }
+            System.out.println();
+        }
+
+
+        System.out.println();
+        System.out.println("task9.1");
+        System.out.println("Упорядочить строки (столбцы) матрицы в порядке возрастания значений.");
+
+        //????
+
+        System.out.println();
+        System.out.println("task9.2");
+        System.out.println("Выполнить циклический сдвиг заданной матрицы на k позиций вправо (влево, вверх, вниз).");
+
+        System.out.print("Введите кол-во озиций для сдвига: ");
+        String position = in.nextLine();
+        int m[][] = matrix.clone();
+        for (int i = 0, matrixLength = matrix.length; i < matrixLength; i++) {
+            m[i] = cyclicRowMove(m[i], Integer.parseInt(position));
+        }
+        printMatrix(m);
+
+        System.out.println();
+        System.out.println("task9.3");
+        System.out.println("Найти и вывести наибольшее число возрастающих (убывающих) элементов матрицы, идущих подряд.");
+
+        int max = 1;
+        int maxValue = matrix[0][0];
+        int maxMax = 1;
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
+                if (matrix[i][j] > maxValue) {
+                    maxValue = matrix[i][j];
+                    max++;
+                    if (max > maxMax) maxMax++;
+                } else {
+                    maxValue = matrix[i][j];
+                    max = 1;
                 }
             }
         }
+        System.out.println("max = " + maxMax);
+
+        System.out.println();
+        System.out.println("task9.4");
+        System.out.println("Найти сумму элементов матрицы, расположенных между первым и вторым положительными элементами каждой строки.");
+
+        int sum = 0;
+        int val1, val2, jots1 = 0, jots2 = 0;
+        boolean s1 = false;
+        boolean s2 = false;
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
+                if ((matrix[i][j] > 0) && !s1) {
+                    // val1 = matrix[i][j];
+                    s1 = true;
+                    jots1 = j;
+                    continue;
+                } else if ((matrix[i][j] > 0) && !s2) {
+                    //  val2 = matrix[i][j];
+                    s2 = true;
+                    jots2 = j;
+                }
+            }
+            if (s1 && s2) {
+                for (int g = jots1 + 1; g < jots2; g++) {
+                    sum += matrix[i][g];
+                }
+                if (jots2 == jots1 + 1) {
+                    System.out.println("Между двумя найденными положительными значениями нет никаких чисел.");
+                } else System.out.println("sum = " + sum);
+            } else {
+                System.out.println("Нет двух положительных значений в строке");
+            }
+            s1 = false;
+            s2 = false;
+            sum = 0;
+        }
+
+        System.out.println();
+        System.out.println("task9.5");
+        System.out.println("Повернуть матрицу на 90 (180, 270) градусов против часовой стрелки.");
+
+        int matrixNew[][] = new int[matrix.length][matrix.length];
+        System.out.print("Введите:\n1 если хотите повернуть матрицу на 90 градусов против часовой стрелки\n" +
+                "2 если хотите повернуть матрицу на 180 градусов против часовой стрелки\n" +
+                "3 если хотите повернуть матрицу на 270 градусов против часовой стрелки" +
+                ": ");
+        String degree = in.nextLine();
+
+        if (Integer.parseInt(degree) == 1) {
+            matrixNew = rotateMatrix(matrix);
+            printMatrix(matrixNew);
+        } else if (Integer.parseInt(degree) == 2) {
+            matrixNew = rotateMatrix(rotateMatrix(matrix));
+            printMatrix(matrixNew);
+        } else if (Integer.parseInt(degree) == 3) {
+            matrixNew = rotateMatrix(rotateMatrix(rotateMatrix(matrix)));
+            printMatrix(matrixNew);
+        } else System.out.println("Error");
+
+        System.out.println();
+        System.out.println("task9.6");
+        System.out.println("Построить матрицу, вычитая из элементов каждой строки матрицы ее среднее арифметическое.");
+
+
+        double[][] matrixWithouSr = new double[matrix.length][matrix.length];
+        double srForTheLune;
+        double summ = 0;
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
+                summ += matrix[i][j];
+            }
+            srForTheLune = summ / matrix.length;
+            for (int j = 0; j < matrixWithouSr.length; j++) {
+                matrixWithouSr[i][j] = matrix[i][j] - srForTheLune;
+            }
+            summ = 0;
+        }
+
+        for (int i = 0; i < matrixWithouSr.length; i++) {
+            for (int j = 0; j < matrixWithouSr.length; j++) {
+                System.out.print(String.format("%.2f ", matrixWithouSr[i][j]) + "\t");
+            }
+            System.out.println();
+        }
+
+        System.out.println();
+        System.out.println("task9.7");
+        System.out.println("Уплотнить матрицу, удаляя из нее строки и столбцы, заполненные нулями.");
+
+        int[][] a = matrix;
+        // int[][] a = {{1, 2, 3, 0, 5},                {2, 2, 3, 0, 5},                {0, 0, 0, 0, 0},                {4, 2, 3, 0, 5},                {5, 2, 3, 0, 5}};
+        int i1 = matrix.length, j1 = matrix.length;
+        boolean notNull;
+
+        for (int i = 0; i < i1; i++) {
+            notNull = true;
+            for (int j = 0; j < j1; j++)
+                if (a[i][j] != 0) {
+                    notNull = false;
+                    break;
+                }
+            if (notNull) {
+                for (int k = i; k < (i1 - 1); k++)
+                    for (int j = 0; j < j1; j++)
+                        a[k][j] = a[k + 1][j];
+                --i;
+                --i1;
+            }
+        }
+        for (int j = 0; j < j1; j++) {
+            notNull = true;
+            for (int i = 0; i < i1; i++)
+                if (a[i][j] != 0) {
+                    notNull = false;
+                    break;
+                }
+            if (notNull) {
+                for (int k = j; k < (j1 - 1); k++)
+                    for (int i = 0; i < j1; i++)
+                        a[i][k] = a[i][k + 1];
+                --j;
+                --j1;
+            }
+        }
+        for (int i = 0; i < j1; i++, System.out.println()) {
+            for (int j = 0; j < j1; j++) {
+                System.out.print(a[i][j] + "\t");
+            }
+        }
+        System.out.println();
+        System.out.println("task9.8");
+        System.out.println("Преобразовать строки матрицы таким образом, чтобы элементы, равные нулю, располагались после всех остальных.");
+        int[][] nullValAtLast = new int[matrix.length][matrix.length];
+        for (int i = 0; i < matrix.length; i++) {
+            int index = 0;
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (matrix[i][j] != 0) nullValAtLast[i][index++] = matrix[i][j];
+            }
+        }
+        printMatrix(nullValAtLast);
+    }
+
+    private static void printMatrix(int[][] matrixB) {
+        for (int[] ints : matrixB) {
+            for (int j = 0; j < matrixB.length; j++) {
+                System.out.print(ints[j] + "\t");
+            }
+            System.out.println();
+        }
+    }
+
+    private static int[][] rotateMatrix(int[][] matrix) {
+        int[][] matrixB = new int[matrix.length][matrix.length];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
+                matrixB[i][j] = matrix[j][matrix.length - 1 - i];
+            }
+        }
+        return matrixB;
     }
 
     private static int[] cyclicRowMove(int[] row, int k) {
         int rowLenght = row.length;
-
-        int r[] = new int[rowLenght];
+        int[] r = new int[rowLenght];
         int n = (k % rowLenght) + rowLenght;
         for (int i = 0; i < rowLenght; i++) {
             r[(i + n) % rowLenght] = row[i];
         }
         return r;
     }
-
-
 }
