@@ -58,7 +58,7 @@ public class Main {
             array[i] = in.nextInt();
         }
 
-        System.out.println("TASK2");
+/*      System.out.println("TASK2");
         System.out.println();
         System.out.println("task1");
         System.out.println("Найти самое короткое и самое длинное число. Вывести найденные числа и их длину.");
@@ -78,27 +78,13 @@ public class Main {
         System.out.println("task4");
         System.out.println("Найти число, в котором число различных цифр минимально. Если таких чисел несколько, найти первое из них.");
         varabValMi(n, array);
-/*
+*/
         System.out.println();
         System.out.println("task5");
         System.out.println("Найти количество чисел, содержащих только четные цифры, а среди них количество чисел с равным числом четных и нечетных цифр.");
+        evenNumbers(array);
 
-        boolean val = false;
-        for (int i = 0; i < array.length; i++) {
-            String s = "" + array[i];
-            char[] ch = s.toCharArray();
-            for (int i1 = 0; i1 < ch.length; i1++) {
-                if (ch[i1] % 2 == 0) {
-                    val = true;
-                } else {
-                    val = false;
-                    break;
-                }
-            }
-            if (val) System.out.println(array[i]);
-        }
-*/
-
+/*
         System.out.println();
         System.out.println("task6");
         System.out.println("Найти число, цифры в котором идут в строгом порядке возрастания. Если таких чисел несколько, найти первое из них.");
@@ -118,9 +104,8 @@ public class Main {
         System.out.println("task9");
         System.out.println("9.Ввести с консоли n-размерность матрицы a [n] [n]. Задать значения элементов матрицы в интервале значений от -n до n с помощью датчика случайных чисел.");
         allAboutMatrix(in);
-
+*/
     }
-
 
     //task1
     private static void greeting(Scanner in) {
@@ -364,6 +349,29 @@ public class Main {
     }
 
     //task5
+    private static void evenNumbers(Integer[] array) {
+        boolean val = true;
+        int val1 = 0, val2 = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] % 2 == 0) {
+                String s = "" + array[i];
+                char[] ch = s.toCharArray();
+                for (int i1 = 0; i1 < ch.length; i1++) {
+                    if (ch[i1] % 2 == 0) {
+                        val1 += 1;
+                    } else {
+                        val2 += 1;
+                    }
+                }
+                val1 = 0;
+                val2 = 0;
+                if (val1 == val2 && val) {
+                    val = false;
+                    System.out.println("Первое значение удовлетворяющее условию: "+array[i]);
+                }
+            }
+        }
+    }
     //task6
     private static void increasingNumbers(Integer[] array) {
         boolean val = false, justFirst = true;
@@ -451,12 +459,15 @@ public class Main {
             System.out.println();
         }
 
-
         System.out.println();
         System.out.println("task9.1");
         System.out.println("Упорядочить строки (столбцы) матрицы в порядке возрастания значений.");
 
-        //????
+        int[][] newArrayAfterSort = matrix;
+        for (int i = 0; i < newArrayAfterSort.length; i++) {
+            Bubsort(newArrayAfterSort[i]);
+        }
+        printMatrix(newArrayAfterSort);
 
         System.out.println();
         System.out.println("task9.2");
@@ -650,6 +661,21 @@ public class Main {
         }
         return matrixB;
     }
+
+
+    public static int[] Bubsort(int[] data) {
+        for (int barrier = data.length - 1; barrier >= 0; barrier--) {
+            for (int index = 0; index < barrier; index++) {
+                if (data[index] > data[index + 1]) {
+                    int tmp = data[index];
+                    data[index] = data[index + 1];
+                    data[index + 1] = tmp;
+                }
+            }
+        }
+        return data;
+    }
+
 
     private static int[] cyclicRowMove(int[] row, int k) {
         int rowLenght = row.length;
